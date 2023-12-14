@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply max-w-5xl mx-[auto] text-white;
+}
+
+.main{
+    @apply bg-primary min-h-[100vh] pt-24 pb-16
+}
+
+.pagination li {
+    @apply px-4 py-2 rounded bg-secondary hover:bg-accent
+}
+
+.sticky a{
+    @apply hover:text-accent
+}
+
+.page-menu li{
+    @apply w-full bg-secondary p-4 rounded text-center hover:bg-accent
+}
+
+.artplayer-app{
+    @apply !h-[100%] !w-[100%]
+}

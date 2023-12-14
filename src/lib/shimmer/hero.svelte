@@ -1,0 +1,1 @@
+<div class="h-[30vh] md:h-[40vh] w-full bg-gradient-to-b from-primary to-transparent bg-gray-700 animate-pulse rounded mb-4"></div>

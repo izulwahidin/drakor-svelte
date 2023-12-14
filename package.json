@@ -1,0 +1,35 @@
+{
+	"name": "gogoanime-svelte-frontend",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview"
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-auto": "^2.0.0",
+		"@sveltejs/kit": "^1.20.4",
+		"autoprefixer": "^10.4.16",
+		"postcss": "^8.4.31",
+		"svelte": "^4.0.5",
+		"tailwindcss": "^3.3.3",
+		"vite": "^4.4.2"
+	},
+	"type": "module",
+	"dependencies": {
+		"@fortawesome/free-solid-svg-icons": "^6.4.2",
+		"@splidejs/svelte-splide": "^0.2.9",
+		"artplayer": "^5.0.9",
+		"artplayer-plugin-hls-quality": "^2.0.0",
+		"cheerio": "^1.0.0-rc.12",
+		"crypto-js": "^4.2.0",
+		"firebase": "^10.7.0",
+		"hls.js": "^1.4.12",
+		"lru-cache": "^10.1.0",
+		"md5": "^2.3.0",
+		"svelte-fa": "^3.0.4",
+		"svelte-lazy": "^1.2.2",
+		"svelte-meta-tags": "^3.1.0"
+	}
+}
