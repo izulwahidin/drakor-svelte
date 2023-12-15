@@ -52,7 +52,7 @@ function formatDate(date) {
 }
 
 
-export const getUpdateAtByUrl = (episodes, targetUrl) => {
+export const getCurrentUpdateAt = (episodes, targetUrl) => {
     // Iterate through the episodes array
     for (let i = 0; i < episodes.length; i++) {
       // Check if the current episode has the target URL

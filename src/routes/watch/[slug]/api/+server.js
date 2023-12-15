@@ -20,13 +20,14 @@ export async function GET({params}){
 
         const embed = 'https:'+$(left_content).find('iframe').attr('src')
         const image = $('meta[itemprop="image"]').attr('content').replace('//','//i0.wp.com/')
-
+        const episode = $(left_content).find('h1').text().trim().match(/Episode (.*?)\s/)[1]
 
         const res = {
             status: true,
             data: {
                 full_title: $(left_content).find('h1').text(),
                 title: $(left_content).find('.video-details .date').text().trim(),
+                episode,
                 description: $(left_content).find('.content-more-js').text().trim(),
                 image,
                 video: await getVideo(embed),
@@ -51,8 +52,10 @@ export async function GET({params}){
 function parseItems(items){
     let res = []
     $(items).each((_,e) => {
+        const episode = $(e).find('.name').text().trim().match(/Episode (.*?)(:?$|\s)/)[1]
         res.push({
             full_title: $(e).find('.name').text().trim(),
+            episode,
             url: $(e).find('a').attr('href').replace('videos','watch'),
             type: $(e).find('.type span').text(),
             image: $(e).find('.picture img').attr('src'),
@@ -84,7 +87,7 @@ async function getVideo(url){
     const hls = await decryptVideo(id,value)
 
     const res = {
-        'iframe': url,
+        'default_embed': url,
         embeds,
         hls
     }

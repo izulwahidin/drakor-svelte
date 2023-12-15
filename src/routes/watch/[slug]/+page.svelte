@@ -4,11 +4,11 @@
     import md5 from 'md5';
     import Stream from '$lib/player.svelte';
     import Lazy from 'svelte-lazy';
-    import op_img from '$lib/func.js'
+    // import op_img from '$lib/func.js'
     import Seo from '$lib/seo.svelte';
-    import {parseTimestamps, getUpdateAtByUrl, isSlugMatched} from '$lib/func.js'
+    import {parseTimestamps, getCurrentUpdateAt, isSlugMatched} from '$lib/func.js'
 	import { page } from '$app/stores';    
-    import {db, collection, query, where, getDocs, auth, onAuthStateChanged, setDoc, doc, deleteDoc } from '$lib/firebase.js'
+    // import {db, collection, query, where, getDocs, auth, onAuthStateChanged, setDoc, doc, deleteDoc } from '$lib/firebase.js'
     export let data 
 
     // let user, watched, is_watched, loading_button_watch;
@@ -69,18 +69,19 @@
     //     is_watched = !is_watched;
     // }
 
-    // // SEO Things
-    // const uploadDate = parseTimestamps(getUpdateAtByUrl(data.info.cards.data.episode,'/videos/'+$page.params.slug))
+    // SEO Things
+    const uploadDate = parseTimestamps(getCurrentUpdateAt(data.data.episodes,$page.url.pathname))
+    console.log(uploadDate)
     let pageTitle = `Watch ${data.data.full_title}`;
 </script>
 
 
 <div class="px-2">
-    <!-- <Seo title={pageTitle} img={op_img(data.info.cards.data.episode[0].image.alt_url)} uploadDate={uploadDate??''} /> -->
+    <Seo title={pageTitle} img={data.data.image} uploadDate={uploadDate}/>
     <TitleBox title={pageTitle} is_center={true}/>
     <div class="aspect-video my-2">
-        {#if !data.data.video.hls.source.file}
-            <iframe src={data.data.video.iframe} title={pageTitle}  frameborder="0"></iframe>
+        {#if !data.data.video.hls.source[0].file}
+            <iframe src={data.data.video.default_embed} title={pageTitle}  frameborder="0"></iframe>
         {:else}
             <Stream url_hls={data.data.video.hls.source.file}/>
         {/if}
