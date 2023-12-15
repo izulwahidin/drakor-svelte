@@ -116,3 +116,8 @@ export async function fetchJson(url){
     const res = await fetch(url);
     return await res.json()
 }
+
+
+export function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}

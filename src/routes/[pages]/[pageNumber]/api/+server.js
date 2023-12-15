@@ -2,8 +2,7 @@ import {PUBLIC_TARGET} from '$env/static/public';
 import { fetchText } from '$lib/func';
 import * as cheerio from 'cheerio';
 
-let globalpages
-let $
+let $, globalpages
 
 export async function GET({params}) {
     const {pages, pageNumber} = params
@@ -86,13 +85,13 @@ function parsePagination(items){
     let res = []
     $(items).each((_,e) => {
 
-        const is_next = $(e).attr('class') == 'previous' ? true : false
-        const is_prev = $(e).attr('class') == 'next' ? true : false
+        const is_next = $(e).attr('class') == 'next' ? true : false
+        const is_prev = $(e).attr('class') == 'previous' ? true : false
+        const isNextPrev = is_next ? 'next' : is_prev ? 'previous' : false
         const is_active = $(e).attr('class') == 'active' ? true : false
         // console.log($(e).find('a').attr('data-page'))
         res.push({
-            is_next,
-            is_prev,
+            isNextPrev,
             is_active,
             page: `/${globalpages}/`+$(e).find('a').attr('data-page')
         })
