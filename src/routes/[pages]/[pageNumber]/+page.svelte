@@ -10,16 +10,25 @@
     import ShimmerCard from '$lib/shimmer/card.svelte'
     import ShimmerTitleBox from '$lib/shimmer/titleBox.svelte'
 
-
-
-
     const {pages, pageNumber} = $page.params
 
     let res
+
+    const fetchData = async () => {
+        try {
+            res = await fetchJson(`${$page.url.origin}/${pages}/${pageNumber}/api`);
+        } catch (err) {
+            console.log(err);
+        }
+    };
     
-    onMount( async () => {
-        res = await fetchJson(`/${pages}/${pageNumber}/api`);
-        // console.log(res.pagination)
+
+    
+    onMount(fetchData());
+    
+    const handlePagination = (() => {
+        res = false;
+        onMount(fetchData());
     })
     
 </script>
@@ -28,10 +37,9 @@
 <div class="px-2">
     {#if res}
         <Seo is_page={true} title={capitalizeFirstLetter(pages)} img={res.cards[0].image}/>
-
-        <TitleBox title="Latest {capitalizeFirstLetter(pages)} Anime" is_center={true}/>
+        <TitleBox title="Latest {capitalizeFirstLetter(pages)} Drama" is_center={true}/>
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
-            {#each res.episode as card}
+            {#each res.cards as card}
                 <div class="relative">
                     <Card
                         cardEpisode={card.episode}
@@ -43,7 +51,7 @@
                 </div>
             {/each}
         </div>
-        <Pagination data={res.pagination}/>
+        <Pagination data={res.pagination} handle={handlePagination}/>
     {:else}
         <Seo title="Please Wait..."/>
         <ShimmerTitleBox/>

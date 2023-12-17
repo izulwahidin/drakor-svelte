@@ -12,7 +12,7 @@ export async function GET({params}) {
     
         switch (pages) {
             case 'sub':
-                endpoint = '/'
+                endpoint = ''
                 break;
             case 'raw':
                 endpoint = 'recently-added-raw'
@@ -33,7 +33,8 @@ export async function GET({params}) {
                 throw 'invalid endpoint'
         }
 
-        const raw = await fetchText(`${PUBLIC_TARGET}/${endpoint}/?page=${pageNumber}`);
+        console.log('woi',`${PUBLIC_TARGET}/${endpoint}?page=${pageNumber}`)
+        const raw = await fetchText(`${PUBLIC_TARGET}/${endpoint}?page=${pageNumber}`);
         $ = cheerio.load(raw);
 
         
@@ -93,7 +94,8 @@ function parsePagination(items){
         res.push({
             isNextPrev,
             is_active,
-            page: `/${globalpages}/`+$(e).find('a').attr('data-page')
+            page: $(e).find('a').attr('data-page'),
+            url: `/${globalpages}/`+$(e).find('a').attr('data-page')
         })
     })
     return res;

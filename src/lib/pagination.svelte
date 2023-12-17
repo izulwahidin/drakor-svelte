@@ -1,8 +1,7 @@
 <script>
     import Fa from 'svelte-fa'
     import { faAngleDoubleRight, faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons'
-    export let data
-    console.log(data)
+    export let data, handle
 
 </script>
 
@@ -10,7 +9,7 @@
     <ul class="pagination flex gap-1 items-center justify-center my-3 sm:gap-2">
         {#each data as pagination}
             {#if pagination.is_active === false}
-                <a href="{pagination.page}" data-sveltekit-reload>
+                <a href="{pagination.url}" on:click={handle}>
                     <li class={pagination.is_active === true ? " !bg-accent ":" "}>
                             {#if pagination.isNextPrev === null}
                                 {pagination.page}

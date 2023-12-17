@@ -32,8 +32,8 @@
             <SplideSlide>
                 <Card
                     cardEpisode={card.episode}
-                    cardImage={card.image.url}
-                    cardTitle={card.title}
+                    cardImage={card.image}
+                    cardTitle={card.full_title}
                     cardUpdate={card.update_at}
                     cardUrl={card.url}
                 />

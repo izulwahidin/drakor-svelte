@@ -11,33 +11,29 @@
     import ShimmerCard from "$lib/shimmer/card.svelte";
 
     async function fetchData(endpoint) {
-        const resp = await fetch(`${$page.url.href}${endpoint}/1/api`);
-        const res = await resp.json()
+        const resp = await fetch(`${$page.url.href}${endpoint}/1/api`).then(r => r.json())
 
-        return {
-            cards: res.cards.data,
-            pagination: res.pagination.data,
-        }
+        return resp
     }
 
 
-    let popular, movie, latest, dub
+    let popular, movie, latest, kshow
     onMount( async () => {
         popular = await fetchData('popular');
         movie = await fetchData('movie');
         latest = await fetchData('sub');
-        dub = await fetchData('dub');
+        kshow = await fetchData('kshow');
     }) 
 </script>
 
 <Seo
     is_page={true}
     is_home={true}
-    img={popular ? popular.cards[0].image.url : 'https://i0.wp.com/images5.fanpop.com/image/photos/31400000/Taiga-Aisaka-tsundere-girls-31408075-2560-1600.png'}
+    img={popular ? popular.cards[0].image : 'https://i0.wp.com/images5.fanpop.com/image/photos/31400000/Taiga-Aisaka-tsundere-girls-31408075-2560-1600.png'}
 />
 
 {#if popular}
-    <Hero data={popular.cards}/>
+    <Hero cards={popular.cards}/>
 {:else}
     <ShimmerHero/>
 {/if}
@@ -61,7 +57,6 @@
     <SliderWithTitle sliderTitle='Movie' sliderData={movie.cards}/>
 {/if}
 
-
-{#if dub}
-    <SliderWithTitle sliderTitle='Dub' sliderData={dub.cards}/>
+{#if kshow}
+    <SliderWithTitle sliderTitle='KShow' sliderData={kshow.cards}/>
 {/if}

@@ -5,6 +5,7 @@
   import { onMount, onDestroy } from 'svelte';
 
   export let url_hls;
+  console.log(url_hls)
 
   let art;
 

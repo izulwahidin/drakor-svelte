@@ -2,9 +2,8 @@
     import Lazy from 'svelte-lazy';
     import op_img from '$lib/func.js'
     export let cardTitle, cardUpdate, cardImage, cardEpisode, cardUrl
-    let updatedCardUrl = cardUrl.split('videos/')[1]
 </script>
-<a href="/watch/{updatedCardUrl}" data-sveltekit-reload>
+<a href={cardUrl} data-sveltekit-reload>
     <div class="absolute inset-x-0 top-0 h-[30%] bg-gradient-to-b from-primary to-transparent"></div>
     <p class="absolute top-4 right-1 bg-accent py-1 px-2 rounded text-xs">E{cardEpisode}</p>
     <p class="absolute top-4 left-1 bg-secondary py-1 px-2 rounded truncate max-w-[60%] text-xs">{cardUpdate}</p>

@@ -1,5 +1,4 @@
 import { LRUCache } from 'lru-cache'
-import { auth, provider, signInWithPopup, signOut } from '$lib/firebase.js'
 import { CryptoJS } from 'crypto-js'
 
 // Your secret key and IV (Initialization Vector)
@@ -15,7 +14,8 @@ export const cache = new LRUCache(cacheOption);
 
 
 const op_img = (url) => {
-    let wp = `https://i0.wp.com/${url.split('//')[1]}`;
+    let wp = url.replace('//','//i0.wp.com/')
+    // let wp = `https://i0.wp.com/${url.split('//')[1]}`;
     return wp
 }
 
@@ -121,3 +121,5 @@ export async function fetchJson(url){
 export function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+// export const currentPath = page.params.origin+page.params.pathname;
