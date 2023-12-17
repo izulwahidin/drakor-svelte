@@ -6,9 +6,9 @@
 
     let data, res, inputValue, minInput, notFound = null;
     const fetchData = async (q) => {
-        const resp = await fetch(`/search/${q}`);
-        res = await resp.json();
-        if(!res.cards.status){
+        res = await fetch(`/search/api?q=${q}`).then(r=>r.json())
+        data = res
+        if(!res.cards){
             notFound = true
             data = null
         } else{
@@ -42,14 +42,14 @@
     {:else if data}
         <Seo is_search={true} title="Search for {inputValue}"/>
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-            {#each data.cards.data as data}
+            {#each res.cards as card}
                 <div class="relative">
                     <Card
-                        cardEpisode={data.episode}
-                        cardImage={data.image.url}
-                        cardTitle={data.title}
-                        cardUpdate={data.update_at}
-                        cardUrl={data.url}
+                        cardEpisode={card.episode}
+                        cardImage={card.image}
+                        cardTitle={card.full_title}
+                        cardUpdate={card.update_at}
+                        cardUrl={card.url}
                     />
                 </div>
             {/each}

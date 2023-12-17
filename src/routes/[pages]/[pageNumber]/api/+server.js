@@ -33,7 +33,6 @@ export async function GET({params}) {
                 throw 'invalid endpoint'
         }
 
-        console.log('woi',`${PUBLIC_TARGET}/${endpoint}?page=${pageNumber}`)
         const raw = await fetchText(`${PUBLIC_TARGET}/${endpoint}?page=${pageNumber}`);
         $ = cheerio.load(raw);
 
