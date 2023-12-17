@@ -10,8 +10,10 @@
     import ShimmerTitleBox from "$lib/shimmer/titleBox.svelte";
     import ShimmerCard from "$lib/shimmer/card.svelte";
 
+    const {origin} = $page.url
+
     async function fetchData(endpoint) {
-        const resp = await fetch(`${$page.url.href}${endpoint}/1/api`).then(r => r.json())
+        const resp = await fetch(`${origin}/${endpoint}/1/api`).then(r => r.json())
 
         return resp
     }
